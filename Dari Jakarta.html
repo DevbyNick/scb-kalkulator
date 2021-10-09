@@ -1,0 +1,233 @@
+<html>
+    <head>
+        <title>Calculate SCB</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="container">
+            <form id="main" method = "post" onSubmit="return false; // Returning false stops the page from reloading">
+                <div class="row mt-5">
+                    <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12">
+                        <div class="card shadow">
+                            <div class="card-header bg-success">
+                                <h3 class="text-white">Index Kalkulasi Harga</h3>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-hover">
+                                    <tr>
+                                        <th>Dari Jakarta ke</th>
+                                        <th>Surabaya</th>
+                                        <th>Semarang</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Kiriman di bawah 1000 kg<br>
+                                            50 kg pertama<br>
+                                            51 kg s/d seterusnya</td>
+                                        <td><br>Rp. 100.000<br>
+                                            Rp. 1.000</td>
+                                        <td><br>Rp. 80.000<br>
+                                            Rp. 800</td>
+                                        <!-- <td><input type="text" class="form-control" id="berat1jkt" value="110"></td>
+                                        <td><input type="text" class="form-control" id="berat1bdg" value="110"></td> -->
+                                    </tr>
+                                    <tr>
+                                        <td>Kiriman 1000 kg s/d 2999 kg</td>
+                                        <td>Rp. 1.000</td>
+                                        <td>Rp. 800</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kiriman 3000 kg s/d 4999 kg</td>
+                                        <td>Rp. 950</td>
+                                        <td>Rp. 750</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kiriman 5000 kg s/d 7999 kg</td>
+                                        <td>Rp. 900</td>
+                                        <td>Rp. 700</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kiriman 8000 kg s/d 9999 kg</td>
+                                        <td>Rp. 850</td>
+                                        <td>Rp. 650</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kiriman 10000 kg s/d dst</td>
+                                        <td>Rp. 800</td>
+                                        <td>Rp. 600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kubikasi -per m3</td>
+                                        <td>Rp. 300.000</td>
+                                        <td>Rp. 200.000</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12">
+                        <div class="card shadow">
+                            <div class="card-header bg-primary">
+                                <h3 class="text-white">Kalkulasi Harga</h3>
+                            </div>
+                            <div class="card-body">
+                                <table class="table">
+                                    <tr id="trjharga">
+                                        <td>Jenis Harga</td>
+                                        <td>&emsp;:&emsp;</td>
+                                        <td>
+                                            <select name="j_harga" id="j_harga">
+                                                <option value="normal">Harga Normal</option>
+                                                <option value="tidak">Harga Khusus</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr id="trkota">
+                                        <td>Kota</td>
+                                        <td>&emsp;:&emsp;</td>
+                                        <td>
+                                            <select name="kotanya" id="kotanya">
+                                                <option value="surabaya">Surabaya</option>
+                                                <option value="semarang">Semarang</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr id="trhkhusus">
+                                        <td>Harga Khusus</td>
+                                        <td>&emsp;:&emsp;</td>
+                                        <td><input type="number" autocomplete="off" step="0.01" class="form-control" name="h_khusus" id="h_khusus" placeholder="Harga khusus dalam Rupiah"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Berat Barang</td>
+                                        <td>&emsp;:&emsp;</td>
+                                        <td><input type="number" autocomplete="off" step="0.0001" class="form-control" name="berat" id="berat" placeholder="Dalam satuan kg"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ukuran Barang</td>
+                                        <td>&emsp;:&emsp;</td>
+                                        <td><input type="number" autocomplete="off" step="0.0001" class="form-control" name="ukuran" id="ukuran" placeholder="Dalam satuan m3"></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td><button class="btn btn-primary m-2" id="cek"> Cek Harga </button></td>
+                                        
+                                    </tr>
+                                    <tr>
+                                        <td>Harganya</td>
+                                        <td>&emsp;:&emsp;</td>
+                                        <td>
+                                            <!-- <div class="row">
+                                                <div class="col-6"> -->
+                                                    <p id="harganya"></p>
+                                                <!-- </div> -->
+                                                <!-- <div class="col-6">
+                                                    <button class="btn btn-outline-danger text-dark" onclick="copyToClipboard('#harganya')">Copy Harga</button>
+                                                </div> -->
+                                            <!-- </div> -->
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+    <script type="text/javascript">
+        // $( document ).ready(function() {
+            
+            $("#cek").click(function(){
+                hitung_harga()
+            }); 
+
+            $(document).ready(function(){
+                $("#trhkhusus").hide();
+            });
+
+            $("#j_harga").change(function () {    
+                $('#berat').val('');  
+                $("#harganya").html(''); 
+
+                var jenis_harga = $("#j_harga").val();
+                if(jenis_harga === 'normal'){
+                        $("#trkota").show();
+                        $("#trhkhusus").hide();
+                } else{
+                        $("#trkota").hide();
+                        $("#trhkhusus").show();
+                }
+            });
+                       
+            function hitung_harga(){
+                var jenis_harga = $("#j_harga").val();
+                var kotanya = $("#kotanya").val();
+                var harga_khusus = $("#h_khusus").val();
+                var beratnya = $("#berat").val();
+                var berat = parseFloat(beratnya);
+                var ukurannya = $("#ukuran").val();
+                var ukuran = parseFloat(ukurannya);
+
+                if(beratnya && ukurannya){
+                        if(jenis_harga === 'normal'){
+                            harga_kotam3 = kotanya === 'surabaya' ? 300000 : 200000;
+                            hargam3 = ukuran * harga_kotam3;
+                            if (berat < 999){
+                                if(berat <51){
+                                    harga_kota2 = kotanya === 'surabaya' ? 100000 : 80000;
+                                    harga = (hargam3 > harga_kota2) ? (ukuran + ' x '+ harga_kotam3 + ' = Rp. '+hargam3+' (m3)') : 'minimum = Rp. ' + harga_kota2;
+                                } else{
+                                    ditambah = berat - 50;
+                                    harga_kota = kotanya === 'surabaya' ? 1000 : 800;
+                                    harga_kota2 = kotanya === 'surabaya' ? 100000 : 80000;
+                                    tambahan = ditambah * harga_kota;
+
+                                    rumus = harga_kota2 + tambahan;
+                                    harga = (hargam3 > rumus) ? (ukuran + ' x '+ harga_kotam3 + ' = Rp. '+hargam3+' (m3)') : ('50 kg&emsp;=&emsp;Rp. ' + harga_kota2 + '<br>' + ditambah + ' kg  x  ' + 'Rp. ' + harga_kota + '&emsp;=&emsp;Rp. ' + (ditambah * harga_kota) + '<br><h5>Total&emsp;=&emsp;Rp. ' + rumus + '</h5>');
+                                }
+                            } else if (berat >= 1000 && berat <= 2999){
+                                harga_kota = kotanya === 'surabaya' ? 1000 : 800;
+                                hargae = berat * harga_kota ;
+                                harga = hargam3 > hargae ? (ukuran + ' x '+ harga_kotam3 + ' = Rp. '+hargam3+' (m3)') : (berat + 'kg x Rp. '+ harga_kota+' = Rp. '+hargae)
+                            } else if (berat >= 3000 && berat <= 4999){
+                                harga_kota = kotanya === 'surabaya' ? 950 : 750;
+                                hargae = berat * harga_kota ;
+                                harga = hargam3 > hargae ? (ukuran + ' x '+ harga_kotam3 + ' = Rp. '+hargam3+' (m3)') : (berat + 'kg x Rp. '+ harga_kota+' = Rp. '+hargae)
+                            } else if (berat >= 5000 && berat <= 7999){
+                                harga_kota = kotanya === 'surabaya' ? 900 : 700;
+                                hargae = berat * harga_kota ;
+                                harga = hargam3 > hargae ? (ukuran + ' x '+ harga_kotam3 + ' = Rp. '+hargam3+' (m3)') : (berat + 'kg x Rp. '+ harga_kota+' = Rp. '+hargae)
+                            } else if (berat >= 8000 && berat <= 9999){
+                                harga_kota = kotanya === 'surabaya' ? 850 : 650;
+                                hargae = berat * harga_kota ;
+                                harga = hargam3 > hargae ? (ukuran + ' x '+ harga_kotam3 + ' = Rp. '+hargam3+' (m3)') : (berat + 'kg x Rp. '+ harga_kota+' = Rp. '+hargae)
+                            } else if (berat >= 10000 ){
+                                harga_kota = kotanya === 'surabaya' ? 800 : 600;
+                                hargae = berat * harga_kota ;
+                                harga = hargam3 > hargae ? (ukuran + ' x '+ harga_kotam3 + ' = Rp. '+hargam3+' (m3)') : (berat + 'kg x Rp. '+ harga_kota+' = Rp. '+hargae)
+                            }
+                        } else{
+                            // harga Khusus
+                            harga = 'Rp. ' + berat * harga_khusus;
+                        }
+                    
+                    $("#harganya").html(harga);
+                } else{
+                    alert('Berat atau Ukuran barang tidak boleh kosong..');
+                }
+            }            
+                       
+            function copyToClipboard(element) {
+                var $temp = $("<input>");
+                $("body").append($temp);
+                $temp.val($(element).text()).select();
+                document.execCommand("copy");
+                $temp.remove();
+                alert('Harga berhasil dicopy')
+            }
+        // });
+        
+    </script>
+</html>
